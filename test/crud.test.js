@@ -1,21 +1,19 @@
 const sequelize = require('../config/dbconn.js');
 const User = require('../models/User.js');
 
+const JANE_DOE = 'janedoe';
 test('insert and select', async () => {
 
   await sequelize.sync();
-  const jane = await User.create({
-    username: 'janedoe',
-    birthday: new Date(1980, 6, 20)
-  });
-  expect(jane.username).toBe('janedoe');
+  const jane = await create(JANE_DOE, new Date(1980, 6, 20));
+  expect(jane.username).toBe(JANE_DOE);
 
   const result = await User.findOne({
     where: {
-      username: 'janedoe'
+      username: JANE_DOE
     }
   });
-  expect(result.username).toBe('janedoe');
+  expect(result.username).toBe(JANE_DOE);
 });
 
 test('update and delete', async () => {
@@ -24,12 +22,12 @@ test('update and delete', async () => {
     username: 'kelly'
   }, {
     where: {
-      username: 'janedoe'
+      username: JANE_DOE
     }
   });
   const result = await User.findOne({
     where: {
-      username: 'janedoe'
+      username: JANE_DOE
     }
   });
   expect(result?.username).toBe(undefined);
@@ -55,3 +53,10 @@ test('update and delete', async () => {
   expect(deleted).toBe(null);
 
 });
+async function create(username, date) {
+  return await User.create({
+    username: username,
+    birthday: date
+  });
+}
+
