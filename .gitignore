@@ -102,3 +102,29 @@ dist
 
 # TernJS port file
 .tern-port
+*.bak
+*.iml
+*.prefs
+*/Thumbs.db
+.DS_Store
+.classpath
+.env
+*.local
+.ftpsync_settings
+.history
+.idea
+.project
+.scannerwork
+.sonar
+.vscode
+Thumbs.db
+build
+class
+classes
+credentials.json
+package-lock.json
+target
+token.json
+yarn.lock
+memory
+sonar-project.properties
